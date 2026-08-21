@@ -86,3 +86,73 @@ return 0;
 ```
 
 **This implicit return is provided only for `main()` and not for any other function.**
+
+### The C++ Preprocessor and the **iostream** File
+
+If your program is to use the usual C++ input or output facilities, you provide these two lines:
+
+```cpp
+#include <iostream>
+using namespace std;
+```
+
+C++ uses a *preprocessor*. This is a program that processes a source file before the main compilation
+takes place. You don't have to do anything special to invoke this preprocessor. It automatically operates
+when you compile the program:
+
+```cpp
+#include <iostream>  // a PREPROCESSOR directive
+```
+
+This directive causes the preprocessor to add the contents of the `iostream` file to your program. This is
+a typical preprocessor action: adding or replacing text in the source text before it's compiled.
+
+**Why should I add the contents of the iostream file to the program?**
+- Communication between the program and the outside world.
+
+The `io` in `iostream` refers to *input*, and to *output*. The `#include` directive causes the contents of the
+`iostream` file to be sent along with the contents of your file to the compiler.
+
+In essence, the contents of the `iostream` file replace the `#include <iostream>` line in the program.
+
+### Namespaces
+
+If you use `iostream` instead of `iostream.h`, you should use the following namespace directive to make the definitions in `iostream` available
+to your program: 
+```cpp
+using namespace std;
+```
+This is called using a *directive*.
+
+
+Namespaces suport is a C++ feature designed to simplify the writing of large programs and of programs that combine pre-existing code from several
+vendors and to help organize programs. One potencial problem is that you might use two prepackaged products that both 
+have, say, a function called `wanda()`. The namespace facility lets a vendor package its wares in a unit called *namespace*
+so that you can use the name of a namespace to indicate which vendor's product you want. So Microflop inc could place its definitions in a namespaces called `Microflop`. 
+Then `Microflop::wanda()` would become the full name for its `wanda()`function.
+
+
+Your program could now use the namespaces to descriminate between various versions:
+```cpp
+Microflop::wanda("go dancing?");        // use Microflop namespace version
+Piscine::wanda("a fish named Desire");  // use Piscine namespace version
+```
+In this spirit, the classes, functions, and variables that are standard component of C++ compilers are now placed in a namespace called `std`. This take place in 
+the *h-free* header files. Thus, you can omit the `using` directive and, instead, code in the following style:
+```cpp
+std::cout <<"Come up and C++ me some time.";
+std::out << std::endl;
+```
+
+The following line means you can use names defined in the  `std` namespaces without usinf the `std::prefix`:
+```cpp
+using namespace std;
+```
+This `using` directive makes all the names in the `std` namespaces **available**. Modern practice regards this is a bit lazy and potenially a problem in large proyects.
+The preferred approaches are to use the `std::` qualifier or to use something called a *using* declaration to make just particular names available:
+```cpp
+using std::cout;        // make cout available    
+using std::endl;        // make endl available
+using std::cin;         // make cin available
+```
+
