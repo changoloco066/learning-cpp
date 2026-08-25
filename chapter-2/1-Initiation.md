@@ -1,6 +1,6 @@
 ## C++ Initiation
 
-Let's begin with a simple C++ program that displays a message: [**`myfirst.cpp`**](programs/chapter-1/myfirst/myfirst.cpp).
+Let's begin with a simple C++ program that displays a message: [**`myfirst.cpp`**](../programs/chapter-1/myfirst/myfirst.cpp)
 It uses the C++ **`cout`** (spelled "see-out") facility to produce character output.
 
 ### Program Adjustments
