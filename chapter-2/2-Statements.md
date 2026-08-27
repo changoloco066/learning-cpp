@@ -6,7 +6,7 @@ To store an item of information in a computer, you must identify both the storag
 storage space the information requires. One way to do this is to use a *declaration statement* to indicate the
 type of storage and to provide the label for the location.
 
-- Ex (using [carrots.cpp](../programs/chapter-2/carrots/carrots.cpp) program)
+- Example (using [carrots.cpp](../programs/chapter-2/carrots/carrots.cpp) program)
 
 ```cpp
 int carrots;
@@ -19,7 +19,7 @@ that storage.
 
 An assignment statement assigns a value to a storage location.
 
-- Ex ([carrots.cpp](../programs/chapter-2/carrots/carrots.cpp))
+- Example ([carrots.cpp](../programs/chapter-2/carrots/carrots.cpp))
 
 This statement assigns the integer `25` to the location `carrot`.
 
