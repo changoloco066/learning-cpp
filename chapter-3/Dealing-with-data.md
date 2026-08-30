@@ -49,7 +49,7 @@ C++ **guarantees** this wraparound behavior for unsigned types, but does **not**
 guarantee it for signed types (overflow on signed types is technically undefined
 behavior — wraparound is just the common behavior on most current systems).
 
-## Choosing an Integer Type
+### Choosing an Integer Type
 
 *Natural Size* refers to the integer form that the compiler handles more efficiently. If there's no compelling reason to choose another type, you should use `int`.
 
@@ -99,3 +99,22 @@ The following two `cout` statements produce the same output:
 cout << endl << endl << "What next?" << endl << "Enter a number:" << endl;
 cout << "\n\nWhat next?" << "\nEnter a number:\n";
 ```
+
+### wchar_t
+
+Programs might have to handle characters sets that don't fit within the confines od a single 8-bit byte.
+The usual 8-bit `char` can represent the basic characters set, and another type, called `whchar_t`. This type is an *integer* with sufficient
+space to represent the largest extended character set used in the sytem. This type has the same size and sign properties as one of the other integer 
+types, which is called the *underlying* type.
+
+
+The `iostream` header files provides parallel facilities in the form of `wcin` and `wcout` for handling `whcar_t` streams. Also you can indicate a wide-character
+constant or string by precending it with an `L`.
+
+The following code stores a `wchar_t` version of the letter *P* in the variable *bob* and displays a *wchar_t* version of the word *tall*.
+
+```cpp
+wchar_t bob = L'P';           // a wide-character constant
+wcout_t << L"tall" << endl;   // outputting a wide-character string
+```
+
