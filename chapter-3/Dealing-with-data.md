@@ -1,4 +1,4 @@
-### The *short, int, long* and *long long* Integer Types
+## The *short, int, long* and *long long* Integer Types
 
 By using different numbers of bits to store values, the C++ types *short, int, long* can
 represent up to four different integer widths. No one is suitable for all computer designs.
@@ -17,7 +17,7 @@ it defines symbolic names to represent different limits.
 
 The program also illustrates *initialization*, which is the use of a declaration statement to assign a value to a variable.
 
-### Unsigned Types
+## Unsigned Types
 
 Each one of the four integer types comes in an unsigned variety that can't hold negative values. This has the
 advantage of increasing the largest value the variable can hold.
@@ -49,7 +49,7 @@ C++ **guarantees** this wraparound behavior for unsigned types, but does **not**
 guarantee it for signed types (overflow on signed types is technically undefined
 behavior — wraparound is just the common behavior on most current systems).
 
-### Choosing an Integer Type
+## Choosing an Integer Type
 
 *Natural Size* refers to the integer form that the compiler handles more efficiently. If there's no compelling reason to choose another type, you should use `int`.
 
@@ -61,3 +61,41 @@ for your needs, you can move up to `long long`.
 Using `short` can conserve memory if `short` is smaller than `int`. Most typically, this is important only if you have a large array of *integers*.
 If conserving space is important, you should use `short` instead of `int`, even if the two are the same size.
 If you need only a single byte, you can use `char`.
+
+## C++ Escape Sequence Codes
+
+Example [bondini.cpp](../programs/chapter-3/bondini/bondini.cpp) demonstrates a few escape sequences. It uses the alert character to get your attention, the newline character to advance the cursor, and the backspace character to back the cursor one space to the left.
+
+| Character Name | ASCII Symbol | C++ Code | ASCII Decimal Code | ASCII Hex Code |
+|---|---|---|---|---|
+| Newline | NL (LF) | `\n` | 10 | 0xA |
+| Horizontal tab | HT | `\t` | 9 | 0x9 |
+| Vertical tab | VT | `\v` | 11 | 0xB |
+| Backspace | BS | `\b` | 8 | 0x8 |
+| Carriage return | CR | `\r` | 13 | 0xD |
+| Alert | BEL | `\a` | 7 | 0x7 |
+| Backslash | `\` | `\\` | 92 | 0x5C |
+| Question mark | `?` | `\?` | 63 | 0x3F |
+| Single quote | `'` | `\'` | 39 | 0x27 |
+| Double quote | `"` | `\"` | 34 | 0x22 |
+
+Note that you treat an escape sequence, such as \n, just as a regular character, such as Q.
+The escape sequence concept dates back to when people communicated with computers using the teletype.
+
+You can use the newline character in character constant notation ('\n') or as characters in a string ("\n"). All three of the following
+move the screen cursor to the beginning of the next line:
+
+```cpp
+cout << endl;    // using the endl manipulator
+cout << "\n";    // using a string
+cout << '\n';    // using a character constant
+```
+
+You can embed the newline character in a longer string; this is often more convenient than using endl.
+
+The following two `cout` statements produce the same output:
+
+```cpp
+cout << endl << endl << "What next?" << endl << "Enter a number:" << endl;
+cout << "\n\nWhat next?" << "\nEnter a number:\n";
+```
