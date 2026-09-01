@@ -1,19 +1,23 @@
-## The *short, int, long* and *long long* Integer Types
+# Chapter 3: Dealing with Data
 
-By using different numbers of bits to store values, the C++ types *short, int, long* can
+## The `short`, `int`, `long`, and `long long` Integer Types
+
+By using different numbers of bits to store values, the C++ types `short`, `int`, `long` can
 represent up to four different integer widths. No one is suitable for all computer designs.
 C++ offers a flexible standard with some guaranteed minimum sizes:
+
 - A `short` integer is at least *16* bits wide.
 - An `int` integer is at least as big as `short`.
 - A `long` integer is at least *32* bits wide and at least as big as `int`.
 - A `long long` integer is at least *64* bits wide and at least as big as `long`.
 
-- Example ([limits.cpp](../programs/chapter-3/limits/limits.cpp))
+Example: [limits.cpp](../programs/chapter-3/limits/limits.cpp)
 
 If you want to know how your system's integers size up, you can use the C++ tools:
+
 - `sizeof` returns the size, in bytes, of a type or a variable.
 - `climits` header file contains information about integer type limits. In particular
-it defines symbolic names to represent different limits.
+  it defines symbolic names to represent different limits.
 
 The program also illustrates *initialization*, which is the use of a declaration statement to assign a value to a variable.
 
@@ -34,7 +38,9 @@ unsigned long long lang_lang;
 
 Note that `unsigned` by itself is short for `unsigned int`.
 
-The example [exceed.cpp](../programs/chapter-3/exceed/exceed.cpp) shows what might happen if your program tries to go beyond the limits for integer types.
+Example: [exceed.cpp](../programs/chapter-3/exceed/exceed.cpp) shows what might happen if your program tries to go beyond the limits for integer types.
+
+### Overflow and Wraparound
 
 Fixed-size integer types have a limited range. When a value goes past that range, it
 doesn't error out — it **wraps around** to the other end, like a car odometer rolling
@@ -51,20 +57,16 @@ behavior — wraparound is just the common behavior on most current systems).
 
 ### Choosing an Integer Type
 
-*Natural Size* refers to the integer form that the compiler handles more efficiently. If there's no compelling reason to choose another type, you should use `int`.
+*Natural size* refers to the integer form that the compiler handles more efficiently. If there's no compelling reason to choose another type, you should use `int`.
 
-If a variable represents something that is never negative, you can use an unsigned type; that way the variable can represent higher values.
-
-If you know that the variable might have to represent integer values greater than a 16-bit integer, you should use `long`. And if a mere two billion is inadequate
-for your needs, you can move up to `long long`.
-
-Using `short` can conserve memory if `short` is smaller than `int`. Most typically, this is important only if you have a large array of *integers*.
-If conserving space is important, you should use `short` instead of `int`, even if the two are the same size.
-If you need only a single byte, you can use `char`.
+- If a variable represents something that is never negative, you can use an unsigned type; that way the variable can represent higher values.
+- If you know that the variable might have to represent integer values greater than a 16-bit integer, you should use `long`. And if a mere two billion is inadequate for your needs, you can move up to `long long`.
+- Using `short` can conserve memory if `short` is smaller than `int`. Most typically, this is important only if you have a large array of integers. If conserving space is important, you should use `short` instead of `int`, even if the two are the same size.
+- If you need only a single byte, you can use `char`.
 
 ## C++ Escape Sequence Codes
 
-Example [bondini.cpp](../programs/chapter-3/bondini/bondini.cpp) demonstrates a few escape sequences. It uses the alert character to get your attention, the newline character to advance the cursor, and the backspace character to back the cursor one space to the left.
+Example: [bondini.cpp](../programs/chapter-3/bondini/bondini.cpp) demonstrates a few escape sequences. It uses the alert character to get your attention, the newline character to advance the cursor, and the backspace character to back the cursor one space to the left.
 
 | Character Name | ASCII Symbol | C++ Code | ASCII Decimal Code | ASCII Hex Code |
 |---|---|---|---|---|
@@ -79,11 +81,10 @@ Example [bondini.cpp](../programs/chapter-3/bondini/bondini.cpp) demonstrates a 
 | Single quote | `'` | `\'` | 39 | 0x27 |
 | Double quote | `"` | `\"` | 34 | 0x22 |
 
-Note that you treat an escape sequence, such as \n, just as a regular character, such as Q.
+Note that you treat an escape sequence, such as `\n`, just as a regular character, such as `Q`.
 The escape sequence concept dates back to when people communicated with computers using the teletype.
 
-You can use the newline character in character constant notation ('\n') or as characters in a string ("\n"). All three of the following
-move the screen cursor to the beginning of the next line:
+You can use the newline character in character constant notation (`'\n'`) or as characters in a string (`"\n"`). All three of the following move the screen cursor to the beginning of the next line:
 
 ```cpp
 cout << endl;    // using the endl manipulator
@@ -91,7 +92,7 @@ cout << "\n";    // using a string
 cout << '\n';    // using a character constant
 ```
 
-You can embed the newline character in a longer string; this is often more convenient than using endl.
+You can embed the newline character in a longer string; this is often more convenient than using `endl`.
 
 The following two `cout` statements produce the same output:
 
@@ -100,21 +101,15 @@ cout << endl << endl << "What next?" << endl << "Enter a number:" << endl;
 cout << "\n\nWhat next?" << "\nEnter a number:\n";
 ```
 
-### wchar_t
+## `wchar_t`
 
-Programs might have to handle characters sets that don't fit within the confines od a single 8-bit byte.
-The usual 8-bit `char` can represent the basic characters set, and another type, called `whchar_t`. This type is an *integer* with sufficient
-space to represent the largest extended character set used in the sytem. This type has the same size and sign properties as one of the other integer 
-types, which is called the *underlying* type.
+Programs might have to handle character sets that don't fit within the confines of a single 8-bit byte. The usual 8-bit `char` can represent the basic character set; another type, called `wchar_t`, handles the rest. This type is an *integer* with sufficient space to represent the largest extended character set used in the system. It has the same size and sign properties as one of the other integer types, which is called the *underlying* type.
 
+The `iostream` header file provides parallel facilities in the form of `wcin` and `wcout` for handling `wchar_t` streams. You can also indicate a wide-character constant or string by preceding it with an `L`.
 
-The `iostream` header files provides parallel facilities in the form of `wcin` and `wcout` for handling `whcar_t` streams. Also you can indicate a wide-character
-constant or string by precending it with an `L`.
-
-The following code stores a `wchar_t` version of the letter *P* in the variable *bob* and displays a *wchar_t* version of the word *tall*.
+The following code stores a `wchar_t` version of the letter *P* in the variable `bob` and displays a `wchar_t` version of the word *tall*:
 
 ```cpp
-wchar_t bob = L'P';           // a wide-character constant
-wcout_t << L"tall" << endl;   // outputting a wide-character string
+wchar_t bob = L'P';        // a wide-character constant
+wcout << L"tall" << endl;  // outputting a wide-character string
 ```
-
